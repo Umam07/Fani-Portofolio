@@ -207,97 +207,145 @@ export const Projects = () => {
                 transformStyle: "preserve-3d",
                 backfaceVisibility: "hidden"
               }}
-              className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden shadow-2xl rounded-[40px] flex flex-col md:flex-row bg-background/40"
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-hidden shadow-2xl rounded-[32px] flex flex-col bg-background"
             >
-              {/* Glass Layer - Decoupled to prevent Firefox flickering during transform */}
-              <div className="absolute inset-0 backdrop-blur-3xl z-0 pointer-events-none" />
-              <div className="absolute inset-0 border border-white/10 rounded-[40px] z-0 pointer-events-none" />
+              {/* Glass border layer */}
+              <div className="absolute inset-0 border border-foreground/5 rounded-[32px] z-0 pointer-events-none" />
+              
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 z-20 p-3 bg-white/5 rounded-full hover:bg-accent hover:text-white transition-all"
+                className="absolute top-4 right-4 z-50 p-2.5 bg-background/80 backdrop-blur-md rounded-full hover:bg-accent hover:text-white transition-all shadow-md"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
 
-              <div className="w-full md:w-2/5 h-64 md:h-full relative z-10">
+              {/* Hero Image — full-width at top */}
+              <div className="relative h-56 md:h-72 w-full shrink-0 overflow-hidden">
                 <img 
                   src={urlFor(selectedProject.image).url()} 
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent md:bg-linear-to-r" />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent" />
+                {/* Category pills over image */}
+                <div className="absolute bottom-4 left-6 flex flex-wrap gap-2">
+                  {selectedProject.category?.map((cat: string) => (
+                    <span key={cat} className="text-[10px] px-3 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white font-bold uppercase tracking-widest">
+                      {cat}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex-1 p-8 md:p-12 overflow-y-auto custom-scrollbar relative z-10">
-                <div className="space-y-8">
-                  <div className="space-y-4">
-                    <h3 className="text-4xl md:text-5xl font-black tracking-tighter">{selectedProject.title}</h3>
-                    <div className="flex flex-wrap gap-6 pt-2">
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Calendar className="w-4 h-4 text-accent" />
-                        <span className="text-sm font-bold">{selectedProject.year}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Clock className="w-4 h-4 text-accent" />
-                        <span className="text-sm font-bold">{selectedProject.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <User className="w-4 h-4 text-accent" />
-                        <span className="text-sm font-bold">{selectedProject.client}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Cpu className="w-4 h-4 text-accent" />
-                        <span className="text-sm font-bold">{selectedProject.role}</span>
-                      </div>
+              {/* Scrollable Content */}
+              <div className="flex-1 overflow-y-auto custom-scrollbar">
+                <div className="p-6 md:p-10 space-y-8">
+                  
+                  {/* Title + Meta */}
+                  <div className="space-y-5">
+                    <h3 className="text-3xl md:text-4xl font-black tracking-tighter leading-tight text-foreground">
+                      {selectedProject.title}
+                    </h3>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.year && (
+                        <div className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/5 text-muted-foreground">
+                          <Calendar className="w-3.5 h-3.5 text-accent" />
+                          <span>{selectedProject.year}</span>
+                        </div>
+                      )}
+                      {selectedProject.duration && (
+                        <div className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/5 text-muted-foreground">
+                          <Clock className="w-3.5 h-3.5 text-accent" />
+                          <span>{selectedProject.duration}</span>
+                        </div>
+                      )}
+                      {selectedProject.client && (
+                        <div className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent">
+                          <User className="w-3.5 h-3.5" />
+                          <span>{selectedProject.client}</span>
+                        </div>
+                      )}
+                      {selectedProject.role && (
+                        <div className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/5 text-muted-foreground">
+                          <Cpu className="w-3.5 h-3.5 text-accent" />
+                          <span>{selectedProject.role}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
 
-                  <div className="grid gap-8">
+                  {/* Divider */}
+                  <div className="h-px bg-foreground/5" />
+
+                  {/* Overview */}
+                  {selectedProject.overview && (
                     <div className="space-y-3">
-                      <h4 className="text-xs font-black uppercase tracking-[0.3em] text-accent">Overview</h4>
-                      <p className="text-muted-foreground leading-relaxed">{selectedProject.overview}</p>
+                      <h4 className="text-xs font-black uppercase tracking-[0.2em] text-accent flex items-center gap-2">
+                        <span className="w-6 h-px bg-accent" /> Overview
+                      </h4>
+                      <p className="text-muted-foreground leading-relaxed text-[15px]">
+                        {selectedProject.overview}
+                      </p>
                     </div>
+                  )}
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <h4 className="text-xs font-black uppercase tracking-[0.3em] text-accent">Challenge</h4>
-                        <p className="text-muted-foreground leading-relaxed">{selectedProject.challenge}</p>
-                      </div>
-                      <div className="space-y-3">
-                        <h4 className="text-xs font-black uppercase tracking-[0.3em] text-accent">Solution</h4>
-                        <p className="text-muted-foreground leading-relaxed">{selectedProject.solution}</p>
-                      </div>
+                  {/* Challenge & Solution */}
+                  {(selectedProject.challenge || selectedProject.solution) && (
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {selectedProject.challenge && (
+                        <div className="space-y-3 p-5 rounded-2xl bg-foreground/[0.03] border border-foreground/5">
+                          <h4 className="text-xs font-black uppercase tracking-[0.15em] text-foreground">Challenge</h4>
+                          <p className="text-muted-foreground leading-relaxed text-[13px]">
+                            {selectedProject.challenge}
+                          </p>
+                        </div>
+                      )}
+                      {selectedProject.solution && (
+                        <div className="space-y-3 p-5 rounded-2xl bg-accent/5 border border-accent/10">
+                          <h4 className="text-xs font-black uppercase tracking-[0.15em] text-accent">Solution</h4>
+                          <p className="text-muted-foreground leading-relaxed text-[13px]">
+                            {selectedProject.solution}
+                          </p>
+                        </div>
+                      )}
                     </div>
+                  )}
 
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2">
-                        <Cpu className="w-4 h-4 text-accent" />
-                        <h4 className="text-xs font-black uppercase tracking-[0.3em] text-accent">Technologies</h4>
-                      </div>
+                  {/* Technologies */}
+                  {selectedProject.technologies && selectedProject.technologies.length > 0 && (
+                    <div className="space-y-3">
+                      <h4 className="text-xs font-black uppercase tracking-[0.2em] text-foreground flex items-center gap-2">
+                        <Cpu className="w-3.5 h-3.5 text-accent" /> Stack
+                      </h4>
                       <div className="flex flex-wrap gap-2">
-                        {selectedProject.technologies.map((tech) => (
+                        {selectedProject.technologies.map((tech: string) => (
                           <span 
                             key={tech}
-                            className="px-4 py-2 bg-white/5 border border-white/5 rounded-xl text-sm font-semibold text-foreground"
+                            className="px-3 py-1.5 bg-foreground/5 border border-foreground/5 rounded-lg text-xs font-bold text-muted-foreground"
                           >
                             {tech}
                           </span>
                         ))}
                       </div>
                     </div>
-                  </div>
+                  )}
 
-                  <div className="pt-8 flex flex-col sm:flex-row gap-4">
-                    <a 
-                      href={selectedProject.docLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-8 py-4 bg-accent text-white rounded-2xl font-black flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl shadow-accent/20"
-                    >
-                      <FileText className="w-5 h-5" />
-                      Project Document
-                    </a>
-                  </div>
+                  {/* CTA Button */}
+                  {selectedProject.docLink && (
+                    <div className="pt-2 pb-2">
+                      <a 
+                        href={selectedProject.docLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full px-8 py-4 bg-foreground text-background rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-accent hover:text-white active:scale-95 transition-all shadow-lg group"
+                      >
+                        <FileText className="w-5 h-5" />
+                        View Full Case Study
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

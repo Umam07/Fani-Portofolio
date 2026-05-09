@@ -18,6 +18,7 @@ export const Navbar = () => {
   const navLinks = [
     { name: "Work", href: "#work" },
     { name: "About", href: "#about" },
+    { name: "Testimonials", href: "#testimonials" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -27,20 +28,11 @@ export const Navbar = () => {
     const elem = document.getElementById(targetId);
     
     if (elem) {
-      const offset = 100;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elemRect = elem.getBoundingClientRect().top;
-      const elemPosition = elemRect - bodyRect;
-      const offsetPosition = elemPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-      
+      elem.scrollIntoView({ behavior: "smooth" });
       setMobileMenuOpen(false);
     }
   };
+
 
   return (
     <nav 

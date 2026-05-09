@@ -1,61 +1,50 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowRight, MousePointer2, Sparkles } from "lucide-react";
+import { ArrowRight, MapPin, Globe } from "lucide-react";
+
 
 export const Hero = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { 
-        staggerChildren: 0.15,
-        delayChildren: 0.3
-      },
+      transition: { staggerChildren: 0.12, delayChildren: 0.2 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+    hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: {
-        duration: 1,
-        ease: [0.23, 1, 0.32, 1] as const,
-      },
+      transition: { duration: 0.9, ease: [0.23, 1, 0.32, 1] as const },
     },
   };
 
+
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-32 pb-20 px-6 overflow-hidden">
-      {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 z-0">
-        <motion.div 
-          animate={{ 
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, 30, 0]
-          }}
+
+      {/* Ambient glow */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], x: [0, 50, 0], y: [0, 30, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] left-[-5%] w-[50%] h-[50%] bg-accent/10 blur-[140px] rounded-full" 
+          className="absolute top-[-15%] left-[-10%] w-[55%] h-[55%] bg-accent/[0.07] blur-[160px] rounded-full"
         />
-        <motion.div 
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            x: [0, -50, 0],
-            y: [0, -30, 0]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] bg-accent/10 blur-[140px] rounded-full" 
+        <motion.div
+          animate={{ scale: [1.2, 1, 1.2], x: [0, -40, 0], y: [0, -25, 0] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[-10%] right-[-5%] w-[45%] h-[45%] bg-accent/[0.05] blur-[140px] rounded-full"
         />
       </div>
 
-      {/* Grid Pattern Overlay */}
-      <div 
-        className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none" 
-        style={{ backgroundImage: 'radial-gradient(circle, var(--foreground) 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 z-0 opacity-[0.035] pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(circle, var(--foreground) 1px, transparent 1px)", backgroundSize: "40px 40px" }}
       />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
@@ -63,41 +52,62 @@ export const Hero = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid lg:grid-cols-2 gap-16 items-center"
+          className="grid lg:grid-cols-2 gap-20 items-center"
         >
-          <div className="flex flex-col items-start gap-8">
-            <motion.h1 
-              variants={itemVariants}
-              className="text-5xl md:text-8xl font-black leading-[1.1] tracking-tight"
-            >
-              <span className="text-muted-foreground text-2xl md:text-4xl font-medium block mb-2">Greetings! I’m</span>
-              <span className="text-foreground">Muhammad <br /> Fani Abdillah</span>
-            </motion.h1>
 
-            <motion.div variants={itemVariants} className="flex flex-col gap-2">
-              <span className="text-accent text-xl md:text-2xl font-bold tracking-wide uppercase">Product (UI/UX) Designer</span>
-              <div className="w-20 h-1 bg-accent/30 rounded-full" />
+          {/* ── LEFT: Copy ── */}
+          <div className="flex flex-col gap-8">
+
+            {/* Available badge */}
+            <motion.div variants={itemVariants} className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="text-xs font-bold text-accent uppercase tracking-widest">Greetings!</span>
+              </span>
             </motion.div>
 
-            <motion.p 
-              variants={itemVariants}
-              className="max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed font-medium"
-            >
-              Dedicated to pushing the boundaries of <span className="text-foreground">avant-garde design</span>, 
-              I am a UI/UX Designer with over 3 years of experience spanning Finance, SaaS, Telco, and Consumer Goods. 
-              I leverage my <span className="text-foreground italic">sociology background</span> to deliver empathetic, 
-              user-centric solutions that matter.
+            {/* Headline */}
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-[5.5rem] font-black leading-[1.05] tracking-tighter">
+              <span className="block text-xl md:text-2xl font-medium text-muted-foreground mb-3 tracking-normal">
+                I'm
+              </span>
+              <span className="text-foreground">Muhammad</span>
+              <br />
+              <span className="relative inline-block text-foreground">
+                Fani Abdillah
+                {/* animated underline */}
+                <motion.span
+                  className="absolute -bottom-2 left-0 h-[4px] bg-accent/40 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+                />
+              </span>
+            </motion.h1>
+
+            {/* Role */}
+            <motion.div variants={itemVariants} className="flex items-center gap-4">
+              <div className="w-10 h-px bg-accent/50" />
+              <span className="text-accent text-lg md:text-xl font-bold tracking-widest uppercase">Product (UI/UX) Designer</span>
+            </motion.div>
+
+            {/* Description */}
+            <motion.p variants={itemVariants} className="max-w-lg text-base md:text-lg text-muted-foreground leading-relaxed">
+              UI/UX Designer with <span className="text-foreground font-semibold">3 years' experience</span> in Finance, SaaS, Telco, and Consumer Goods. I aspire to push the limits of avant-garde design — leveraging my{" "}
+              <span className="text-foreground italic font-semibold">sociology background</span> to bring empathy and user-centered insight.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-5 mt-4">
-              <a 
+
+            {/* CTAs */}
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-4 pt-2">
+              <a
                 href="#work"
-                className="px-8 py-4 bg-foreground text-background rounded-2xl font-black flex items-center gap-3 hover:bg-accent hover:text-white transition-all duration-300 shadow-2xl shadow-foreground/5 group cursor-pointer"
+                className="px-8 py-4 bg-foreground text-background rounded-2xl font-black flex items-center gap-3 hover:bg-accent hover:text-white transition-all duration-300 shadow-2xl shadow-foreground/10 group cursor-pointer"
               >
-                Explore Projects
+                See My Work
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a 
+              <a
                 href="#contact"
                 className="px-8 py-4 glass border-foreground/5 rounded-2xl font-bold hover:bg-foreground/5 transition-all active:scale-95 text-foreground cursor-pointer"
               >
@@ -106,53 +116,57 @@ export const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Hero Visual Element */}
+          {/* ── RIGHT: Profile Card (Bento Style) ── */}
           <motion.div 
-            variants={itemVariants}
-            className="hidden lg:block relative"
+            variants={itemVariants} 
+            className="hidden lg:flex flex-col justify-center items-center"
           >
-            <div className="relative z-10 glass-card p-10 border-white/10 overflow-hidden group">
-              <div className="absolute top-0 right-0 p-4">
-                <MousePointer2 className="w-6 h-6 text-accent animate-bounce" />
-              </div>
+            <div className="relative w-full max-w-[440px] grid grid-cols-2 gap-4 p-2">
               
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-accent/20 flex items-center justify-center">
-                    <div className="w-6 h-6 rounded-full bg-accent" />
+              {/* Location Card (Spans 2 columns) */}
+              <motion.div 
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="col-span-2 relative overflow-hidden group p-8 rounded-[2.5rem] border border-foreground/5 bg-gradient-to-br from-foreground/[0.03] to-transparent backdrop-blur-sm transition-colors hover:bg-foreground/[0.05] shadow-2xl shadow-foreground/5"
+              >
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center gap-5">
+                    <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent shadow-inner border border-accent/20">
+                      <MapPin className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-1.5">Based in</p>
+                      <h3 className="text-2xl font-black text-foreground tracking-tight">Jakarta, Indonesia</h3>
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="w-32 h-3 bg-white/10 rounded-full" />
-                    <div className="w-20 h-2 bg-white/5 rounded-full" />
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="h-24 rounded-2xl bg-white/[0.02] border border-white/5 group-hover:bg-accent/5 transition-colors duration-500" />
-                  ))}
-                </div>
-                
-                <div className="h-32 rounded-2xl bg-linear-to-br from-accent/20 to-transparent border border-accent/10 flex items-end p-4">
-                  <div className="w-full space-y-2">
-                    <div className="w-1/2 h-2 bg-accent/40 rounded-full" />
-                    <div className="w-3/4 h-2 bg-accent/20 rounded-full" />
-                  </div>
-                </div>
-              </div>
 
-              {/* Floating accents */}
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-accent/10 blur-3xl rounded-full" />
+                </div>
+                
+                {/* Decorative background icon */}
+                <Globe className="absolute -bottom-8 -right-8 w-40 h-40 text-foreground/[0.03] group-hover:text-accent/[0.08] group-hover:rotate-12 transition-all duration-700 -z-0" strokeWidth={0.5} />
+              </motion.div>
+
+              {/* Experience Card */}
+              <motion.div 
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="col-span-2 relative overflow-hidden group p-8 rounded-[2.5rem] border border-foreground/5 bg-gradient-to-br from-foreground/[0.03] to-transparent backdrop-blur-sm transition-colors hover:bg-foreground/[0.05] shadow-2xl shadow-foreground/5"
+              >
+                <div className="relative z-10 flex items-center gap-8">
+                  <div>
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-1.5">Experience</p>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-5xl font-black text-foreground tracking-tighter">3</span>
+                      <span className="text-2xl font-black text-accent">+</span>
+                      <span className="ml-2 text-xl font-bold text-foreground/50 tracking-tight">Years in Design</span>
+                    </div>
+                  </div>
+                </div>
+                {/* Subtle background glow */}
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors duration-500" />
+              </motion.div>
             </div>
-            
-            {/* Decorative circles */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 border border-white/5 rounded-full animate-pulse" />
-            <div className="absolute -bottom-20 -left-20 w-64 h-64 border border-white/5 rounded-full animate-[spin_20s_linear_infinite]" />
           </motion.div>
         </motion.div>
       </div>
-
     </section>
   );
 };
-
