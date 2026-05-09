@@ -5,6 +5,7 @@ export const projectType = defineType({
   title: 'Project',
   type: 'document',
   fields: [
+    // 1. Informasi Utama
     defineField({
       name: 'title',
       title: 'Judul Project',
@@ -12,18 +13,16 @@ export const projectType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Deskripsi Singkat',
-      type: 'text',
+      name: 'category',
+      title: 'Kategori',
+      type: 'array',
+      of: [{ type: 'string' }],
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'image',
-      title: 'Gambar Project',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      name: 'client',
+      title: 'Klien',
+      type: 'string',
     }),
     defineField({
       name: 'year',
@@ -40,6 +39,25 @@ export const projectType = defineType({
       title: 'Peran (Role)',
       type: 'string',
     }),
+
+    // 2. Visual
+    defineField({
+      name: 'image',
+      title: 'Gambar Project',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      validation: (rule) => rule.required(),
+    }),
+
+    // 3. Konten / Deskripsi
+    defineField({
+      name: 'description',
+      title: 'Deskripsi Singkat (Card)',
+      type: 'text',
+      validation: (rule) => rule.required(),
+    }),
     defineField({
       name: 'overview',
       title: 'Overview',
@@ -55,12 +73,8 @@ export const projectType = defineType({
       title: 'Solution',
       type: 'text',
     }),
-    defineField({
-      name: 'tags',
-      title: 'Tags Utama',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
+
+    // 4. Teknis & Link
     defineField({
       name: 'technologies',
       title: 'Semua Teknologi',

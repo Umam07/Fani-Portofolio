@@ -9,7 +9,8 @@ import { urlFor } from "../lib/sanity.image";
 interface Project {
   title: string;
   description: string;
-  tags: string[];
+  category: string[];
+  client: string;
   image: any;
   year: string;
   duration: string;
@@ -136,9 +137,9 @@ export const Projects = () => {
                     {project.description}
                   </p>
                   <div className="mt-auto flex flex-wrap gap-2">
-                    {project.tags?.map(tag => (
-                      <span key={tag} className="text-[10px] px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-muted-foreground uppercase tracking-widest font-bold">
-                        {tag}
+                    {project.category?.map(cat => (
+                      <span key={cat} className="text-[10px] px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-muted-foreground uppercase tracking-widest font-bold">
+                        {cat}
                       </span>
                     ))}
                   </div>
@@ -242,6 +243,10 @@ export const Projects = () => {
                       </div>
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <User className="w-4 h-4 text-accent" />
+                        <span className="text-sm font-bold">{selectedProject.client}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <Cpu className="w-4 h-4 text-accent" />
                         <span className="text-sm font-bold">{selectedProject.role}</span>
                       </div>
                     </div>
