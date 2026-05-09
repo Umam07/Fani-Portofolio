@@ -37,7 +37,7 @@ export const Projects = () => {
 
   const fetchProjects = async () => {
     try {
-      const query = `*[_type == "project"] | order(_createdAt desc)`;
+      const query = `*[_type == "project"] | order(order asc, _createdAt desc)`;
       const data = await client.fetch(query);
       setProjects(data);
     } catch (error) {
