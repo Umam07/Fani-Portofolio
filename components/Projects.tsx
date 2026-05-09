@@ -3,12 +3,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ExternalLink, ChevronLeft, ChevronRight, X, Calendar, Clock, User, FileText, Cpu } from "lucide-react";
+import { client } from "../lib/sanity";
+import { urlFor } from "../lib/sanity.image";
 
 interface Project {
   title: string;
   description: string;
   tags: string[];
-  image: string;
+  image: any;
   year: string;
   duration: string;
   role: string;
@@ -19,94 +21,9 @@ interface Project {
   docLink: string;
 }
 
-const PROJECTS_DATA: Project[] = [
-  {
-    title: "Visionary Dashboard",
-    description: "A high-performance analytics platform for modern businesses with real-time data visualization.",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    image: "https://images.unsplash.com/photo-1551288049-bbda4e32f71d?auto=format&fit=crop&q=80&w=1000",
-    year: "2024",
-    duration: "4 Months",
-    role: "Lead UI/UX Designer",
-    overview: "Visionary is an enterprise-grade analytics dashboard designed to help stakeholders make data-driven decisions through intuitive visualization and real-time monitoring.",
-    challenge: "The primary challenge was organizing massive amounts of complex data into a simplified, non-overwhelming interface that remains functional for power users.",
-    solution: "Implemented a modular widget system with customizable layouts and advanced filtering capabilities, wrapped in a high-contrast dark theme for better focus.",
-    technologies: ["Figma", "Adobe Illustrator", "Next.js", "Recharts"],
-    docLink: "#"
-  },
-  {
-    title: "Aura E-Commerce",
-    description: "A premium minimalist shopping experience with seamless transitions and lightning fast checkout.",
-    tags: ["React", "Supabase", "Framer Motion"],
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000",
-    year: "2023",
-    duration: "3 Months",
-    role: "Senior UI Designer",
-    overview: "Aura is a high-end fashion e-commerce platform that prioritizes visual storytelling and effortless navigation to increase conversion rates.",
-    challenge: "Traditional e-commerce platforms often feel cluttered. We needed to maintain a minimalist aesthetic while ensuring all critical sales triggers were present.",
-    solution: "Developed a 'ghost' UI approach where secondary elements fade until needed, combined with fluid motion transitions that guide the user through the shopping funnel.",
-    technologies: ["Figma", "After Effects", "React", "Tailwind CSS"],
-    docLink: "#"
-  },
-  {
-    title: "FinTech Mobile App",
-    description: "Simplifying wealth management for the next generation of investors with AI-driven insights.",
-    tags: ["React Native", "Firebase", "D3.js"],
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1000",
-    year: "2023",
-    duration: "6 Months",
-    role: "Product Designer",
-    overview: "A mobile-first investment platform aimed at Gen Z, making complex financial instruments accessible and engaging through gamification.",
-    challenge: "Finance is often perceived as boring or intimidating by younger audiences. We had to bridge the gap between regulatory requirements and engaging UX.",
-    solution: "Created a story-based onboarding and an interactive 'wealth tree' visualization that evolves as the user's portfolio grows.",
-    technologies: ["Figma", "Miro", "React Native", "Firebase"],
-    docLink: "#"
-  },
-  {
-    title: "EcoTrack Platform",
-    description: "Empowering communities to track and reduce their carbon footprint through collective action.",
-    tags: ["Vue.js", "Node.js", "Leaflet"],
-    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=1000",
-    year: "2024",
-    duration: "2 Months",
-    role: "UI/UX Consultant",
-    overview: "EcoTrack is a community-driven platform for monitoring environmental impact and organizing local sustainability initiatives.",
-    challenge: "Encouraging long-term user engagement in environmental tracking is difficult without immediate personal benefit.",
-    solution: "Implemented a local leaderboard system and 'Impact Badges' that can be shared on social media, fostering a sense of community and pride.",
-    technologies: ["Figma", "Notion", "Vue.js", "D3.js"],
-    docLink: "#"
-  },
-  {
-    title: "Pulse Health Sync",
-    description: "Advanced health monitoring integrated with wearable devices for personalized wellness coaching.",
-    tags: ["Swift", "HealthKit", "Machine Learning"],
-    image: "https://images.unsplash.com/photo-1576091160550-2173bdd99602?auto=format&fit=crop&q=80&w=1000",
-    year: "2023",
-    duration: "5 Months",
-    role: "UX Researcher",
-    overview: "A comprehensive health app that syncs with multiple wearables to provide a holistic view of user well-being and predictive health alerts.",
-    challenge: "Handling sensitive health data requires high trust and extreme clarity in how data is processed and presented.",
-    solution: "Designed a 'Privacy-First' dashboard with clear, plain-language explanations of health metrics and automated monthly wellness reports.",
-    technologies: ["Figma", "Maze", "Swift", "CoreML"],
-    docLink: "#"
-  },
-  {
-    title: "Nova CRM",
-    description: "The next generation of customer relationship management for remote-first agencies.",
-    tags: ["Next.js", "Prisma", "PostgreSQL"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-    year: "2022",
-    duration: "8 Months",
-    role: "Product Designer",
-    overview: "A specialized CRM designed for the unique workflows of remote creative agencies, focusing on collaboration and project transparency.",
-    challenge: "Existing CRMs were either too generic or too complex for the fast-paced, collaborative nature of creative agencies.",
-    solution: "Built a Kanban-centric interface with integrated feedback loops and automated client reporting tools tailored for agency-client relations.",
-    technologies: ["Figma", "Whimsical", "Next.js", "Prisma"],
-    docLink: "#"
-  }
-];
-
 export const Projects = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -114,12 +31,26 @@ export const Projects = () => {
 
   useEffect(() => {
     setMounted(true);
+    fetchProjects();
   }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const query = `*[_type == "project"] | order(_createdAt desc)`;
+      const data = await client.fetch(query);
+      setProjects(data);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = PROJECTS_DATA.slice(indexOfFirstProject, indexOfLastProject);
-  const totalPages = Math.ceil(PROJECTS_DATA.length / projectsPerPage);
+  const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+  const totalPages = Math.ceil(projects.length / projectsPerPage);
+
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -147,65 +78,76 @@ export const Projects = () => {
           <div className="hidden md:block h-px flex-1 bg-white/5 mx-12 mb-6" />
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[500px]">
-          <AnimatePresence mode="popLayout">
-            {currentProjects.map((project, i) => (
-              <motion.div 
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ 
-                  duration: 0.4, 
-                  delay: i * 0.05,
-                  ease: [0.23, 1, 0.32, 1] as const 
-                }}
-                onClick={() => setSelectedProject(project)}
-                style={{ 
-                  willChange: "transform, opacity",
-                  backfaceVisibility: "hidden",
-                  transformStyle: "preserve-3d"
-                }}
-                className="glass-card group overflow-hidden cursor-pointer flex flex-col h-full"
-              >
-              <div className="aspect-[4/3] bg-neutral-900 relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-20">
-                  <div className="bg-white text-black px-6 py-3 rounded-full shadow-2xl font-bold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                    View Details
-                    <ExternalLink className="w-4 h-4" />
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
+          </div>
+        ) : projects.length === 0 ? (
+          <div className="flex flex-col justify-center items-center min-h-[400px] text-center">
+            <p className="text-xl text-muted-foreground">No projects found in Sanity CMS.</p>
+            <p className="text-sm text-muted-foreground mt-2">Go to /studio to add your first project!</p>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[500px]">
+            <AnimatePresence mode="popLayout">
+              {currentProjects.map((project, i) => (
+                <motion.div 
+                  key={project.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ 
+                    duration: 0.4, 
+                    delay: i * 0.05,
+                    ease: [0.23, 1, 0.32, 1] as const 
+                  }}
+                  onClick={() => setSelectedProject(project)}
+                  style={{ 
+                    willChange: "transform, opacity",
+                    backfaceVisibility: "hidden",
+                    transformStyle: "preserve-3d"
+                  }}
+                  className="glass-card group overflow-hidden cursor-pointer flex flex-col h-full"
+                >
+                <div className="aspect-[4/3] bg-neutral-900 relative overflow-hidden">
+                  <img 
+                    src={urlFor(project.image).url()} 
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-20">
+                    <div className="bg-white text-black px-6 py-3 rounded-full shadow-2xl font-bold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                      View Details
+                      <ExternalLink className="w-4 h-4" />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="p-8 flex flex-col flex-1">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-bold tracking-tight group-hover:text-accent transition-colors">
-                    {project.title}
-                  </h3>
-                  <span className="text-xs font-bold text-accent px-2 py-1 bg-accent/10 rounded-md">
-                    {project.year}
-                  </span>
-                </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-2">
-                  {project.description}
-                </p>
-                <div className="mt-auto flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="text-[10px] px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-muted-foreground uppercase tracking-widest font-bold">
-                      {tag}
+                <div className="p-8 flex flex-col flex-1">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-bold tracking-tight group-hover:text-accent transition-colors">
+                      {project.title}
+                    </h3>
+                    <span className="text-xs font-bold text-accent px-2 py-1 bg-accent/10 rounded-md">
+                      {project.year}
                     </span>
-                  ))}
+                  </div>
+                  <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-2">
+                    {project.description}
+                  </p>
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    {project.tags?.map(tag => (
+                      <span key={tag} className="text-[10px] px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-muted-foreground uppercase tracking-widest font-bold">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-        </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+          </div>
+        )}
 
         {/* Pagination */}
         {mounted && totalPages > 1 && (
@@ -278,7 +220,7 @@ export const Projects = () => {
 
               <div className="w-full md:w-2/5 h-64 md:h-full relative z-10">
                 <img 
-                  src={selectedProject.image} 
+                  src={urlFor(selectedProject.image).url()} 
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
