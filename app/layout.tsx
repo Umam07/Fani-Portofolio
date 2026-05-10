@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     description: "Product Designer with 3.5 years of experience solving real problems through scalable, behavior-driven design.",
     creator: "@faniabdillah", // Placeholder
   },
+  verification: {
+    google: "hWWTtgw-uT_2xEYt_BVXQIDQxKfQ1sIH6cSrT9e626s",
+  },
 };
 
 export default function RootLayout({
