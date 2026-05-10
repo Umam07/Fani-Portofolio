@@ -95,7 +95,7 @@ export const Hero = () => {
               </p>
               
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-semibold">Product designer (3,5 years+)</span> across insurance, finance, SaaS, telco, and consumer sectors — solving real problems through scalable, behavior-driven design with measurable impact.
+                <span className="text-foreground font-semibold">Product designer</span> across insurance, finance, SaaS, telco, and consumer sectors — solving real problems through scalable, behavior-driven design with measurable impact.
               </p>
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
