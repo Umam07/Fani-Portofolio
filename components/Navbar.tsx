@@ -3,13 +3,17 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
+import { useTheme } from "next-themes";
 import { ThemeToggle } from "./ThemeToggle";
 
 export const Navbar = () => {
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -49,9 +53,30 @@ export const Navbar = () => {
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-2xl font-black tracking-tighter text-gradient cursor-pointer"
+              className="text-2xl font-black tracking-tighter text-gradient cursor-pointer flex items-center"
             >
-              FANI<span className="text-accent">.</span>
+              {mounted && resolvedTheme === 'dark' ? (
+                <img 
+                  src="https://res.cloudinary.com/dr57ribr5/image/upload/v1778412306/Logo_Fani_White_qq9dyg.png" 
+                  alt="FANI Logo" 
+                  className="h-8 w-auto"
+                />
+              ) : (
+                <>
+                  FANI<span className="text-accent">.</span>
+                </>
+              )}
+              {mounted && resolvedTheme === 'light' ? (
+                <img 
+                  src="https://res.cloudinary.com/dr57ribr5/image/upload/v1778412303/Logo_Fani_ihxgyc.svg" 
+                  alt="FANI Logo" 
+                  className="h-8 w-auto"
+                />
+              ) : (
+                <>
+                  FANI<span className="text-accent">.</span>
+                </>
+              )}
             </motion.div>
           </a>
 

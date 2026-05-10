@@ -64,8 +64,8 @@ export const Hero = () => {
             </motion.div>
 
             {/* Headline */}
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-[5.5rem] font-black leading-[1.05] tracking-tighter">
-              <span className="block text-xl md:text-2xl font-medium text-muted-foreground mb-3 tracking-normal">
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-[5.5rem] font-normal leading-[1.05] tracking-tighter">
+              <span className="block text-xl md:text-2xl font-semibold text-muted-foreground mb-3 tracking-normal">
                 I'm
               </span>
               <span className="text-foreground">Muhammad</span>
@@ -85,14 +85,27 @@ export const Hero = () => {
             {/* Role */}
             <motion.div variants={itemVariants} className="flex items-center gap-4">
               <div className="w-10 h-px bg-accent/50" />
-              <span className="text-accent text-lg md:text-xl font-bold tracking-widest uppercase">Product (UI/UX) Designer</span>
+              <span className="text-accent text-lg md:text-xl font-bold tracking-widest uppercase">Product (UI/UX) Designer/UI Engineer</span>
             </motion.div>
 
             {/* Description */}
-            <motion.p variants={itemVariants} className="max-w-lg text-base md:text-lg text-muted-foreground leading-relaxed">
-              UI/UX Designer with <span className="text-foreground font-semibold">3 years' experience</span> in Finance, SaaS, Telco, and Consumer Goods. I aspire to push the limits of avant-garde design — leveraging my{" "}
-              <span className="text-foreground italic font-semibold">sociology background</span> to bring empathy and user-centered insight.
-            </motion.p>
+            <motion.div variants={itemVariants} className="max-w-xl flex flex-col gap-6">
+              <p className="text-lg md:text-xl font-medium text-foreground italic leading-tight">
+                Aspire to push the limits of avant-garde design.
+              </p>
+              
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                <span className="text-foreground font-semibold">Product Designer (3,5 years)</span> across insurance, finance, SaaS, telco, and consumer sectors — solving real problems through scalable, behavior-driven design with measurable impact.
+              </p>
+
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                Design beyond interfaces. Turning design into a growth catalyst through deep behavioral thinking and a critical sociology lens, transforming complexity into clear, actionable product experiences.
+              </p>
+
+              <p className="text-sm md:text-base text-muted-foreground/80 leading-relaxed border-l-2 border-accent/20 pl-4 py-1 italic">
+                In my spare time, I swing the charts across markets (stocks-crypto), binge-watching geopolitics, memes (also sh*tpost), and cultural dynamics.
+              </p>
+            </motion.div>
 
 
             {/* CTAs */}
@@ -151,7 +164,7 @@ export const Hero = () => {
                   <div>
                     <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-1.5">Experience</p>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-5xl font-black text-foreground tracking-tighter">3</span>
+                      <span className="text-5xl font-black text-foreground tracking-tighter">3,5</span>
                       <span className="text-2xl font-black text-accent">+</span>
                       <span className="ml-2 text-xl font-bold text-foreground/50 tracking-tight">Years in Design</span>
                     </div>
