@@ -34,6 +34,15 @@ export const testimonialType = defineType({
       type: 'string',
       group: 'person',
     }),
+    defineField({
+      name: 'image',
+      title: 'Foto Profil',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      group: 'person',
+    }),
 
     // --- CONTENT ---
     defineField({
@@ -67,6 +76,7 @@ export const testimonialType = defineType({
       title: 'Tanggal Testimoni',
       type: 'date',
       group: 'meta',
+      initialValue: () => new Date().toISOString().split('T')[0],
     }),
     defineField({
       name: 'linkedinUrl',
@@ -80,12 +90,13 @@ export const testimonialType = defineType({
       title: 'name',
       subtitle: 'company',
       rating: 'rating',
+      media: 'image',
     },
-    prepare({ title, subtitle, rating }) {
+    prepare({ title, subtitle, rating, media }) {
       return {
         title,
         subtitle: `${subtitle || ''} (${rating} stars)`,
-        media: UserIcon,
+        media: media || UserIcon,
       }
     },
   },
