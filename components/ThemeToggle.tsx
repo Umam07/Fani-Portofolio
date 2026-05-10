@@ -34,7 +34,7 @@ export const ThemeToggle = () => {
     );
 
     const isDark = newTheme === "dark";
-    const accentColor = isDark ? "45, 212, 191" : "15, 118, 110";
+    const accentColor = "162, 190, 60";
 
     // Container for all ripple layers
     const container = document.createElement("div");

@@ -17,7 +17,7 @@
   --foreground: #0f172a;
   --muted-foreground: #64748b;
   --accent: #A2BE3C;
-  --accent-muted: rgba(15, 118, 110, 0.1);
+  --accent-muted: rgba(162, 190, 60, 0.1);
   --glass: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(0, 0, 0, 0.08);
 }
@@ -27,7 +27,7 @@
   --foreground: #ededed;
   --muted-foreground: #94a3b8;
   --accent: #A2BE3C;
-  --accent-muted: rgba(45, 212, 191, 0.1);
+  --accent-muted: rgba(162, 190, 60, 0.1);
   --glass: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
 }
