@@ -1,3 +1,4 @@
+import React from 'react'
 import { defineField, defineType } from 'sanity'
 import { CommentIcon, UserIcon, HeartIcon } from '@sanity/icons'
 
@@ -35,12 +36,10 @@ export const testimonialType = defineType({
       group: 'person',
     }),
     defineField({
-      name: 'image',
-      title: 'Foto Profil',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      name: 'imageUrl',
+      title: 'Link Foto Profil',
+      description: 'Tempel link foto di sini (contoh: dari LinkedIn atau Cloudinary)',
+      type: 'url',
       group: 'person',
     }),
 
@@ -90,13 +89,13 @@ export const testimonialType = defineType({
       title: 'name',
       subtitle: 'company',
       rating: 'rating',
-      media: 'image',
+      imageUrl: 'imageUrl',
     },
-    prepare({ title, subtitle, rating, media }) {
+    prepare({ title, subtitle, rating, imageUrl }) {
       return {
         title,
         subtitle: `${subtitle || ''} (${rating} stars)`,
-        media: media || UserIcon,
+        media: imageUrl ? () => <img src={imageUrl} style={{width: '100%', height: '100%', objectFit: 'cover'}} /> : UserIcon,
       }
     },
   },

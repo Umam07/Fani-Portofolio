@@ -15,6 +15,7 @@ interface Testimonial {
   relationship: string;
   date: string;
   linkedinUrl: string;
+  imageUrl?: string;
 }
 
 export const Testimonials = () => {
@@ -92,7 +93,7 @@ export const Testimonials = () => {
               
               <div className="flex items-center gap-4 mb-8">
                 <img 
-                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=random&color=fff&bold=true&size=128`}
+                  src={testimonial.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=random&color=fff&bold=true&size=128`}
                   alt={testimonial.name}
                   className="w-16 h-16 rounded-2xl object-cover ring-2 ring-black/5 dark:ring-white/5 group-hover:ring-accent/30 transition-all"
                 />
@@ -190,7 +191,7 @@ export const Testimonials = () => {
               
               <div className="flex items-center gap-5 mb-8">
                 <img 
-                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(selectedTestimonial.name)}&background=random&color=fff&bold=true&size=128`}
+                  src={selectedTestimonial.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedTestimonial.name)}&background=random&color=fff&bold=true&size=128`}
                   alt={selectedTestimonial.name}
                   className="w-20 h-20 rounded-2xl object-cover ring-4 ring-black/5 dark:ring-white/5"
                 />
