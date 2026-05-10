@@ -58,12 +58,9 @@ export const Hero = () => {
           {/* ── LEFT: Copy ── */}
           <div className="flex flex-col gap-8">
 
-            {/* Available badge */}
-            <motion.div variants={itemVariants} className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-xs font-bold text-accent uppercase tracking-widest">Greetings!</span>
-              </span>
+            {/* Greetings Label */}
+            <motion.div variants={itemVariants}>
+              <span className="text-xs font-bold text-accent uppercase tracking-[0.3em]">Greetings!</span>
             </motion.div>
 
             {/* Headline */}

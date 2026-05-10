@@ -61,7 +61,7 @@ export const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight">
               Let's craft your <br />
               <span className="text-accent italic">next big idea.</span>
             </h2>
@@ -79,14 +79,14 @@ export const Contact = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-6 group"
                 >
-                  <div className="w-14 h-14 rounded-2xl glass flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl glass flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-300 shrink-0">
                     {info.icon}
                   </div>
                   <div>
                     <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">
                       {info.label}
                     </p>
-                    <p className="text-lg font-semibold group-hover:text-accent transition-colors">
+                    <p className="text-base md:text-lg font-semibold group-hover:text-accent transition-colors break-all md:break-normal">
                       {info.value}
                     </p>
                   </div>
@@ -103,7 +103,7 @@ export const Contact = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col justify-between"
           >
-            <div className="glass-card p-10 md:p-12 space-y-10 relative overflow-hidden">
+            <div className="glass-card p-6 sm:p-10 md:p-12 space-y-10 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-5">
                 <Send className="w-32 h-32" />
               </div>
@@ -117,7 +117,7 @@ export const Contact = () => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-5 glass rounded-2xl transition-all duration-300 active:scale-95 flex items-center gap-3 group ${social.color}`}
+                      className={`p-4 md:p-5 glass rounded-2xl transition-all duration-300 active:scale-95 flex items-center gap-3 group ${social.color}`}
                     >
                       {social.icon}
                       <span className="font-bold text-sm">{social.name}</span>

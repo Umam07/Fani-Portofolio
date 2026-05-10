@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
-import { Quote, Star, Building2, User2, CalendarDays } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { Quote, Star, Building2, User2, CalendarDays, X } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 import { client } from "../lib/sanity";
 
@@ -20,6 +20,18 @@ interface Testimonial {
 export const Testimonials = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial | null>(null);
+
+  useEffect(() => {
+    if (selectedTestimonial) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedTestimonial]);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -105,9 +117,20 @@ export const Testimonials = () => {
                 ))}
               </div>
 
-              <blockquote className="text-muted-foreground leading-relaxed mb-8 italic relative z-10 flex-1 line-clamp-6">
-                "{testimonial.content}"
-              </blockquote>
+              <div className="relative flex-1 mb-8 flex flex-col">
+                <blockquote className="text-muted-foreground leading-relaxed italic relative z-10 line-clamp-4">
+                  "{testimonial.content}"
+                </blockquote>
+                {testimonial.content.length > 150 && (
+                  <button 
+                    onClick={() => setSelectedTestimonial(testimonial)}
+                    className="text-accent text-sm font-bold mt-3 self-start hover:text-accent/80 transition-colors flex items-center gap-1 group/btn"
+                  >
+                    Read full testimonial
+                    <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                  </button>
+                )}
+              </div>
 
               <div className="pt-6 border-t border-black/5 dark:border-white/5 space-y-3 mt-auto">
                 {testimonial.relationship && (
@@ -139,6 +162,68 @@ export const Testimonials = () => {
           ))}
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {selectedTestimonial && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedTestimonial(null)}
+              className="absolute inset-0 bg-background/80 backdrop-blur-md"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl p-8 md:p-10 z-10 max-h-[90vh] flex flex-col shadow-2xl shadow-black/10 dark:shadow-white/5 backdrop-blur-lg border border-glass-border rounded-[20px] bg-background/90 will-change-transform will-change-opacity"
+            >
+              <button 
+                onClick={() => setSelectedTestimonial(null)}
+                className="absolute top-6 right-6 p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
+              <Quote className="absolute top-10 right-10 w-24 h-24 text-accent/5 -z-10 rotate-12" />
+              
+              <div className="flex items-center gap-5 mb-8">
+                <img 
+                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(selectedTestimonial.name)}&background=random&color=fff&bold=true&size=128`}
+                  alt={selectedTestimonial.name}
+                  className="w-20 h-20 rounded-2xl object-cover ring-4 ring-black/5 dark:ring-white/5"
+                />
+                <div>
+                  <h3 className="font-bold text-2xl leading-tight mb-1">
+                    {selectedTestimonial.name}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                    <span className="font-medium text-accent">{selectedTestimonial.role}</span>
+                    <span className="opacity-30 hidden md:inline">•</span>
+                    <span className="font-medium">{selectedTestimonial.company}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-1 mb-6">
+                {[...Array(5)].map((_, idx) => (
+                  <Star 
+                    key={idx} 
+                    className={`w-5 h-5 ${idx < (selectedTestimonial.rating || 5) ? "fill-accent text-accent" : "text-black/10 dark:text-white/10"}`} 
+                  />
+                ))}
+              </div>
+
+              <div className="overflow-y-auto custom-scrollbar pr-4 -mr-4 flex-1">
+                <blockquote className="text-lg md:text-xl text-foreground leading-relaxed italic font-medium">
+                  "{selectedTestimonial.content}"
+                </blockquote>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

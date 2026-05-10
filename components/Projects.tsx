@@ -108,7 +108,7 @@ export const Projects = () => {
                     backfaceVisibility: "hidden",
                     transformStyle: "preserve-3d"
                   }}
-                  className="glass-card group overflow-hidden cursor-pointer flex flex-col h-full"
+                  className="backdrop-blur-lg border border-glass-border rounded-[20px] bg-background/80 group overflow-hidden cursor-pointer flex flex-col h-full"
                 >
                 <div className="aspect-[4/3] bg-neutral-900 relative overflow-hidden">
                   <img 

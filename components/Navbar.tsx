@@ -55,9 +55,9 @@ export const Navbar = () => {
             </motion.div>
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <div className="flex gap-8 text-sm font-semibold tracking-wide">
+          {/* Desktop & Mobile Actions */}
+          <div className="flex items-center gap-4 md:gap-8">
+            <div className="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide">
               {navLinks.map((link) => (
                 <a 
                   key={link.name} 
@@ -72,15 +72,15 @@ export const Navbar = () => {
             </div>
             
             <ThemeToggle />
-          </div>
 
-          {/* Mobile Menu Toggle */}
-          <button 
-            className="md:hidden p-2 text-foreground"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            {/* Mobile Menu Toggle */}
+            <button 
+              className="md:hidden p-2 text-foreground"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -94,9 +94,6 @@ export const Navbar = () => {
             className="absolute top-full left-0 w-full p-6 md:hidden"
           >
             <div className="glass-card p-8 flex flex-col gap-6 items-center shadow-2xl">
-              <div className="w-full flex justify-end">
-                <ThemeToggle />
-              </div>
               {navLinks.map((link) => (
                 <a 
                   key={link.name} 
