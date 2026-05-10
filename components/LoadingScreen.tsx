@@ -57,7 +57,7 @@ export const LoadingScreen = () => {
               transition={{ duration: 0.5 }}
               className="text-6xl md:text-8xl font-black tracking-tighter mb-8"
             >
-              FANI<span className="text-accent">.</span>
+              fan<span className="text-accent">.</span>
             </motion.div>
 
             <div className="w-64 h-[2px] bg-white/5 rounded-full relative overflow-hidden mb-4">
@@ -74,7 +74,7 @@ export const LoadingScreen = () => {
               animate={{ opacity: 1 }}
               className="text-xs font-bold tracking-[0.4em] text-neutral-500 uppercase flex items-center gap-4"
             >
-              <span>Crafting Digital Magic</span>
+              <span>Crafting digital magic</span>
               <span className="w-8 h-px bg-neutral-800" />
               <span className="text-accent">{counter}%</span>
             </motion.div>
