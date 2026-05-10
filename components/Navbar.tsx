@@ -55,27 +55,17 @@ export const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               className="text-2xl font-black tracking-tighter text-gradient cursor-pointer flex items-center"
             >
-              {mounted && resolvedTheme === 'dark' ? (
+              {mounted ? (
                 <img 
-                  src="https://res.cloudinary.com/dr57ribr5/image/upload/v1778412306/Logo_Fani_White_qq9dyg.png" 
-                  alt="FANI Logo" 
+                  src={resolvedTheme === 'dark' 
+                    ? "https://res.cloudinary.com/dr57ribr5/image/upload/v1778415517/Logo_Fani_White_xwtfxw.png" 
+                    : "https://res.cloudinary.com/dr57ribr5/image/upload/v1778415516/Logo_Fani_Black_ncrmry.png"
+                  } 
+                  alt="Logo" 
                   className="h-8 w-auto"
                 />
               ) : (
-                <>
-                  FANI<span className="text-accent">.</span>
-                </>
-              )}
-              {mounted && resolvedTheme === 'light' ? (
-                <img 
-                  src="https://res.cloudinary.com/dr57ribr5/image/upload/v1778412303/Logo_Fani_ihxgyc.svg" 
-                  alt="FANI Logo" 
-                  className="h-8 w-auto"
-                />
-              ) : (
-                <>
-                  FANI<span className="text-accent">.</span>
-                </>
+                <div className="h-8 w-8" />
               )}
             </motion.div>
           </a>

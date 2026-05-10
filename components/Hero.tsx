@@ -64,7 +64,7 @@ export const Hero = () => {
             </motion.div>
 
             {/* Headline */}
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-[5.5rem] font-normal leading-[1.05] tracking-tighter">
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-[5.5rem] font-bold leading-[1.05] tracking-tighter">
               <span className="block text-xl md:text-2xl font-semibold text-muted-foreground mb-3 tracking-normal">
                 I'm
               </span>
@@ -85,7 +85,7 @@ export const Hero = () => {
             {/* Role */}
             <motion.div variants={itemVariants} className="flex items-center gap-4">
               <div className="w-10 h-px bg-accent/50" />
-              <span className="text-accent text-lg md:text-xl font-bold tracking-widest uppercase">Product (UI/UX) Designer/UI Engineer</span>
+              <span className="text-accent text-lg md:text-xl font-semibold tracking-widest uppercase">Product designer</span>
             </motion.div>
 
             {/* Description */}
@@ -95,7 +95,7 @@ export const Hero = () => {
               </p>
               
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-semibold">Product Designer (3,5 years)</span> across insurance, finance, SaaS, telco, and consumer sectors — solving real problems through scalable, behavior-driven design with measurable impact.
+                <span className="text-foreground font-semibold">Product designer (3,5 years+)</span> across insurance, finance, SaaS, telco, and consumer sectors — solving real problems through scalable, behavior-driven design with measurable impact.
               </p>
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
@@ -103,7 +103,7 @@ export const Hero = () => {
               </p>
 
               <p className="text-sm md:text-base text-muted-foreground/80 leading-relaxed border-l-2 border-accent/20 pl-4 py-1 italic">
-                In my spare time, I swing the charts across markets (stocks-crypto), binge-watching geopolitics, memes (also sh*tpost), and cultural dynamics.
+               I believe great design starts with passion and understanding, then drives growth.
               </p>
             </motion.div>
 
@@ -114,7 +114,7 @@ export const Hero = () => {
                 href="#work"
                 className="px-8 py-4 bg-foreground text-background rounded-2xl font-black flex items-center gap-3 hover:bg-accent hover:text-white transition-all duration-300 shadow-2xl shadow-foreground/10 group cursor-pointer"
               >
-                See My Work
+                See my work
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
@@ -145,7 +145,7 @@ export const Hero = () => {
                     </div>
                     <div>
                       <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-1.5">Based in</p>
-                      <h3 className="text-2xl font-black text-foreground tracking-tight">Jakarta, Indonesia</h3>
+                      <h3 className="text-2xl font-semibold text-foreground tracking-tight">Jakarta, Indonesia</h3>
                     </div>
                   </div>
 
@@ -164,9 +164,9 @@ export const Hero = () => {
                   <div>
                     <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-1.5">Experience</p>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-5xl font-black text-foreground tracking-tighter">3,5</span>
+                      <span className="text-5xl font-bold text-foreground tracking-tighter">3,5</span>
                       <span className="text-2xl font-black text-accent">+</span>
-                      <span className="ml-2 text-xl font-bold text-foreground/50 tracking-tight">Years in Design</span>
+                      <span className="ml-2 text-xl font-semibold text-foreground/50 tracking-tight">years in product design</span>
                     </div>
                   </div>
                 </div>

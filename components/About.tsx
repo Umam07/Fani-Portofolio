@@ -2,15 +2,15 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { Sparkles, GraduationCap, Palette, Globe, Camera, TrendingUp } from "lucide-react";
+import { Sparkles, GraduationCap, Palette, Globe, TrendingUp, Braces } from "lucide-react";
 
 export const About = () => {
   const interests = [
-    { icon: <GraduationCap className="w-4 h-4" />, label: "Sociology" },
-    { icon: <TrendingUp className="w-4 h-4" />, label: "Finance" },
+    { icon: <GraduationCap className="w-4 h-4" />, label: "Sociology & cultural studies" },
+    { icon: <TrendingUp className="w-4 h-4" />, label: "Capital market (Stocks & Web3)" },
     { icon: <Globe className="w-4 h-4" />, label: "Geopolitics" },
-    { icon: <Camera className="w-4 h-4" />, label: "Photography" },
-    { icon: <Palette className="w-4 h-4" />, label: "Motion Graphics" },
+    { icon: <Palette className="w-4 h-4" />, label: "Multimedia" },
+    { icon: <Braces className="w-4 h-4" />, label: "UI engineer" },
   ];
 
   return (
@@ -27,7 +27,7 @@ export const About = () => {
           >
             <div className="relative aspect-[4/5] overflow-hidden rounded-[40px] z-10 border border-white/10 shadow-2xl">
               <Image
-                src="https://res.cloudinary.com/dr57ribr5/image/upload/v1778256547/Foto_Profile_rubdc1.jpg"
+                src="https://res.cloudinary.com/dr57ribr5/image/upload/v1778415659/Gemini_Final_Professional_Look_jkegkb.png"
                 alt="Muhammad Fani Abdillah"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -65,7 +65,7 @@ export const About = () => {
                 <Sparkles className="w-4 h-4 text-accent" />
                 <span className="text-xs font-bold tracking-widest text-accent uppercase">Me in a nutshell</span>
               </motion.div>
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-tight">
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
                 Design with <span className="text-accent">empathy</span>, <br />
                 insight, and play.
               </h2>
@@ -82,12 +82,8 @@ export const About = () => {
                 user-centered solutions that actually work.
               </p>
               <p>
-                I love building scalable systems and intuitive interfaces that make every interaction effortless. 
-                Beyond design, I explore finance, culture, and geopolitics, while fueling creativity through 
-                photography and motion graphics.
-              </p>
-              <p className="text-foreground font-semibold">
-                At heart, I design with empathy, insight, and a playful touch—because good design should feel human.
+                Beyond design, I explore capital market, cultural dynamics, and geopolitics, while fueling creativity through 
+                multimedia stuffs.
               </p>
             </div>
 

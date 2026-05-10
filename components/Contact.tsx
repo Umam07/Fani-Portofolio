@@ -61,7 +61,7 @@ export const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-8 tracking-tighter leading-tight">
               Let's craft your <br />
               <span className="text-accent italic">next big idea.</span>
             </h2>
@@ -109,7 +109,7 @@ export const Contact = () => {
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold mb-6">Stay Connected</h3>
+                <h3 className="text-2xl font-bold mb-6">Stay connected</h3>
                 <div className="flex flex-wrap gap-4">
                   {socialLinks.map((social) => (
                     <a
@@ -130,14 +130,14 @@ export const Contact = () => {
               <div className="pt-10 border-t border-white/5">
                 <p className="text-muted-foreground mb-8 leading-relaxed">
                   Ready to start a conversation? My inbox is always open 
-                  for creative collaborations.
+                  for meaningful collaborations.
                 </p>
                 <a
                   href="mailto:muhammadfaniabdillah@gmail.com"
-                  className="w-full py-5 bg-foreground text-background rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-accent hover:text-white transition-all duration-500 shadow-2xl shadow-foreground/5"
+                  className="w-full py-5 bg-foreground text-background rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-accent hover:text-white transition-all duration-500 shadow-2xl shadow-foreground/5"
                 >
                   <Mail className="w-5 h-5" />
-                  Drop me a message
+                  Drop a message
                 </a>
               </div>
             </div>

@@ -68,7 +68,7 @@ export const Projects = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
           <div className="max-w-xl">
-            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tighter">
               Made with design <span className="text-accent italic">& curiosity</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
@@ -160,7 +160,7 @@ export const Projects = () => {
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
-            <div className="flex items-center gap-4 font-black tracking-widest text-sm">
+            <div className="flex items-center gap-4 font-bold tracking-widest text-sm">
               <span className="text-accent">{String(currentPage).padStart(2, '0')}</span>
               <span className="opacity-20">/</span>
               <span className="text-muted-foreground">{String(totalPages).padStart(2, '0')}</span>
