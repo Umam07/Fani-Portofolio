@@ -8,6 +8,7 @@ import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { About } from "@/components/About";
 import { Testimonials } from "@/components/Testimonials";
+import { Articles } from "@/components/Articles";
 import { Contact } from "@/components/Contact";
 import { LoadingScreen } from "@/components/LoadingScreen";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <Projects />
       <About />
       <Testimonials />
+      <Articles />
       <Contact />
 
       {/* Footer */}

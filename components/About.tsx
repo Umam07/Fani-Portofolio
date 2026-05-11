@@ -66,14 +66,14 @@ export const About = () => {
                 <span className="text-xs font-bold tracking-widest text-accent uppercase">Me in a nutshell</span>
               </motion.div>
               <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
-                Design with <span className="text-accent">empathy</span>, <br />
-                insight, and play.
+                Design grounded in <span className="text-accent">people</span> and culture<br />
+                
               </h2>
             </div>
 
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-medium">
               <p>
-                A <span className="text-foreground">UX/UI Designer</span>, passionate about blending ideas 
+                A <span className="text-foreground">Product Designer</span>, passionate about blending ideas 
                 like a good mashup—whether in design, research, or storytelling.
               </p>
               <p>
