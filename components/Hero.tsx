@@ -93,7 +93,7 @@ export const Hero = () => {
               <p className="text-lg md:text-xl font-medium text-foreground italic leading-tight">
                 Aspire to push the limits of avant-garde design.
               </p>
-              
+
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                 <span className="text-foreground font-semibold">Product designer</span> across insurance, finance, SaaS, telco, and consumer sectors — solving real problems through scalable, behavior-driven design with measurable impact.
               </p>
@@ -103,7 +103,7 @@ export const Hero = () => {
               </p>
 
               <p className="text-sm md:text-base text-muted-foreground/80 leading-relaxed border-l-2 border-accent/20 pl-4 py-1 italic">
-               I believe great design starts with passion and understanding, then drives growth.
+                I believe great design starts with passion and understanding, then drives growth.
               </p>
             </motion.div>
 
@@ -127,14 +127,14 @@ export const Hero = () => {
           </div>
 
           {/* ── RIGHT: Profile Card (Bento Style) ── */}
-          <motion.div 
-            variants={itemVariants} 
+          <motion.div
+            variants={itemVariants}
             className="hidden lg:flex flex-col justify-center items-center"
           >
             <div className="relative w-full max-w-[440px] grid grid-cols-2 gap-4 p-2">
-              
+
               {/* Location Card (Spans 2 columns) */}
-              <motion.div 
+              <motion.div
                 whileHover={{ y: -5, scale: 1.02 }}
                 className="col-span-2 relative overflow-hidden group p-8 rounded-[2.5rem] border border-foreground/5 bg-gradient-to-br from-foreground/[0.03] to-transparent backdrop-blur-sm transition-colors hover:bg-foreground/[0.05] shadow-2xl shadow-foreground/5"
               >
@@ -150,13 +150,13 @@ export const Hero = () => {
                   </div>
 
                 </div>
-                
+
                 {/* Decorative background icon */}
                 <Globe className="absolute -bottom-8 -right-8 w-40 h-40 text-foreground/[0.03] group-hover:text-accent/[0.08] group-hover:rotate-12 transition-all duration-700 -z-0" strokeWidth={0.5} />
               </motion.div>
 
               {/* Experience Card */}
-              <motion.div 
+              <motion.div
                 whileHover={{ y: -5, scale: 1.02 }}
                 className="col-span-2 relative overflow-hidden group p-8 rounded-[2.5rem] border border-foreground/5 bg-gradient-to-br from-foreground/[0.03] to-transparent backdrop-blur-sm transition-colors hover:bg-foreground/[0.05] shadow-2xl shadow-foreground/5"
               >
@@ -164,8 +164,7 @@ export const Hero = () => {
                   <div>
                     <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-1.5">Experience</p>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-5xl font-bold text-foreground tracking-tighter">3,5</span>
-                      <span className="text-2xl font-black text-accent">+</span>
+                      <span className="text-5xl font-bold text-foreground tracking-tighter">4</span>
                       <span className="ml-2 text-xl font-semibold text-foreground/50 tracking-tight">years in product design</span>
                     </div>
                   </div>

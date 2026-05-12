@@ -59,7 +59,7 @@ export const Articles = () => {
         <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
           <div className="max-w-xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tighter">
-              <span className="text-4xl md:text-5xl font-bold mb-6 tracking-tighter">Article</span>
+              <span className="text-4xl md:text-5xl font-bold mb-6 tracking-tighter">Articles</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
               Writing in spare time about markets, design, gaming, and everything in between
@@ -75,22 +75,22 @@ export const Articles = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ 
+              transition={{
                 duration: 0.4,
                 delay: i * 0.05,
                 ease: [0.23, 1, 0.32, 1] as const
               }}
               className="group"
             >
-              <a 
+              <a
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block h-full backdrop-blur-lg border border-glass-border rounded-[20px] bg-background/80 overflow-hidden transition-all duration-500 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 flex flex-col"
               >
                 <div className="aspect-[4/3] bg-neutral-900 relative overflow-hidden">
-                  <img 
-                    src={urlFor(article.image).url()} 
+                  <img
+                    src={urlFor(article.image).url()}
                     alt={article.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
